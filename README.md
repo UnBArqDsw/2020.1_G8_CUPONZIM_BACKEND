@@ -1,7 +1,7 @@
 # CUPOZIM BACKEND
 Esse repositório é destinado a código de backend do Grupo 8 - CUPONZIM 
 
-# NomedoProjeto
+# Cuponzim
 
 **Número do Grupo**: 8<br>
 **Código da Disciplina**: FGA0208-T01<br>
