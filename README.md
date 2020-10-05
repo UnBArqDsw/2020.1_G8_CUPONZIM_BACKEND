@@ -7,7 +7,6 @@ Esse repositório é destinado a código de backend do Grupo 8 - CUPONZIM
 **Código da Disciplina**: FGA0208-T01<br>
 
 ## Alunos
-## Alunos
 |Matrícula | Aluno |
 | -- | -- |
 | 17/0036634  | João de Assis da Silva Carneiro |
