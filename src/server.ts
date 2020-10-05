@@ -1,2 +1,2 @@
-const a: number = 7;
-console.log(a);
+const a = 7
+console.log(a)
