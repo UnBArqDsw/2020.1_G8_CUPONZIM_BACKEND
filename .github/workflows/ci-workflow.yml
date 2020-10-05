@@ -10,3 +10,12 @@ jobs:
       - uses: stefanoeb/eslint-action@1.0.2
         with:
           files: src/
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Run tests
+        run: yarn test
