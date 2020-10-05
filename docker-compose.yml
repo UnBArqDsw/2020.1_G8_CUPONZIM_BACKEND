@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  node:
+    image: node:12
+    volumes:
+      - .:/usr/src/cuponzim
+    working_dir: /usr/src/cuponzim
+    command: bash -c "yarn && yarn dev"
+    ports:
+      - "3333:3333"
+
