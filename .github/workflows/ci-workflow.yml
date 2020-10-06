@@ -4,9 +4,21 @@ on: [pull_request]
 
 jobs:
   eslint:
+    name: runner / eslint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: stefanoeb/eslint-action@1.0.2
+      - name: eslint
+        uses: reviewdog/action-eslint@v1
         with:
-          files: src/
+          reporter: github-pr-review
+          eslint_flags: 'src/'
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Run tests
+        run: yarn test
