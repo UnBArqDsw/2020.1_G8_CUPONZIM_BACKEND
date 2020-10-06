@@ -25,6 +25,18 @@ Adicione 3 ou mais screenshots do projeto em termos de interface e funcionamento
 **Linguagens**: TypeScript<br>
 **Tecnologias**: Node + Express <br>
 
+Para rodar o projeto é necessário usar os seguintes comandos
+
+```console
+foo@bar:~$ docker-compose build
+```
+ 
+ O comando acima é executado apenas a primeira vez que o sistema é iniciado, após isso basta usar:
+ 
+ ```console
+foo@bar:~$ docker-compose up
+```
+
 ## Uso 
 Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
 
