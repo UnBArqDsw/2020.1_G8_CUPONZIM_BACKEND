@@ -38,7 +38,16 @@ foo@bar:~$ docker-compose up
 ```
 
 ## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
+Para rodar os testes em ambiente de desenvolvimento use os comandos:
+
+```console
+foo@bar:~$ docker-compose run node bash
+```
+E após:
+
+```console
+foo@bar:~$ yarn test
+```
 
 ## Vídeo
 Adicione 1 ou mais vídeos com a execução do projeto final.
