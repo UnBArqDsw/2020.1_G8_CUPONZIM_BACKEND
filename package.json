@@ -6,14 +6,17 @@
   "author": "zarbielli <jlfz06@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server.ts",
+    "dev": "nodemon src/index.ts",
     "build": "sucrase ./src -d ./dist --transforms typescript,imports",
     "test": "jest --no-cache"
   },
   "dependencies": {
     "-": "^0.0.1",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^8.4.0",
+    "typeorm": "^0.2.28"
   },
   "devDependencies": {
     "@types/cors": "^2.8.7",
