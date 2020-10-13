@@ -3,7 +3,7 @@ name: CD
 on: [push]
 
 jobs:
-    deploy_homolog:
+    deploy_heroku:
         if: github.ref == 'refs/heads/master'
         runs-on: ubuntu-latest
         steps:
