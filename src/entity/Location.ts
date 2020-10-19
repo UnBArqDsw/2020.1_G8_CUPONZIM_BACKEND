@@ -1,5 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm"; 
-
+import {Entity, PrimaryGeneratedColumn, Column,OneToMany} from "typeorm"; 
+import {Shop} from "./Shop"
 @Entity() 
 export class Location {   
    @PrimaryGeneratedColumn() 
@@ -16,5 +16,8 @@ export class Location {
    
    @Column("varchar",{length:50}) 
    type_location: string;
+   
+   @OneToMany(()=>Shop,shop => shop.location)
+   shops: Shop[];
    
 }

@@ -1,7 +1,9 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm"; 
+import {Entity, PrimaryGeneratedColumn, Column,ManyToOne,OneToMany} from "typeorm"; 
+import {Location} from "./Location"
+import {Lot} from "./Lot"
 
 @Entity() 
-export class Location {   
+export class Shop {   
    @PrimaryGeneratedColumn() 
    idShop: number; 
    
@@ -16,5 +18,12 @@ export class Location {
    
    @Column("varchar",{length:50}) 
    type_location: string;
+
+   @ManyToOne(()=>Location,location => location.shops)
+   location : Location;
+   
+   @OneToMany(()=>Lot,lot => lot.shop)
+   lots: Lot[];
+   
    
 }

@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm"; 
+import {Entity, PrimaryGeneratedColumn, Column,ManyToOne} from "typeorm"; 
+import {Lot} from "./Lot"
 
 @Entity() 
 export class Coupon {   
@@ -8,4 +9,7 @@ export class Coupon {
    @Column() 
    is_used: boolean; 
    
+   @ManyToOne(()=>Lot,lot => lot.coupons)
+   lot : Lot;
+
 }

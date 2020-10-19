@@ -1,4 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm"; 
+import {Entity, PrimaryGeneratedColumn, Column,ManyToOne,OneToMany} from "typeorm"; 
+import {Shop} from "./Shop"
+import {Coupon} from "./Coupon"
 
 @Entity() 
 export class Lot {   
@@ -17,4 +19,9 @@ export class Lot {
    @Column()
    expiration_date: string;
    
+   @OneToMany(()=>Coupon,coupon => coupon.lot)
+   coupons: Coupon[];
+
+   @ManyToOne(()=>Shop,shop => shop.lots)
+   shop : Shop;
 }

@@ -1,5 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm"; 
-
+import {Entity, PrimaryGeneratedColumn, Column,ManyToMany,JoinTable} from "typeorm"; 
+import {Shop} from "./Shop"
 @Entity() 
 export class Client {   
    @PrimaryGeneratedColumn() 
@@ -16,6 +16,9 @@ export class Client {
 
    @Column() 
    cellphone_number_client: number;
-   
-   
+
+   @ManyToMany(type => Shop)
+   @JoinTable()
+   favorite_shop_client:Shop[]
+
 }
