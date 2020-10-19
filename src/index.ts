@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import express from 'express'
+import 'reflect-metadata'
 import { createConnection } from 'typeorm'
 import { typeOrmConfig } from '../typeOrmConfig'
 
