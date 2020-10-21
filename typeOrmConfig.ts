@@ -9,7 +9,12 @@ const typeOrmConfig: PostgresConnectionOptions = {
   database: String(process.env.DB_DATABASE),
   synchronize: true,
   logging: false,
-  entities: ['src/entities/**/*.ts', 'dist/entities/**/*.js']
+  entities: ['src/entities/**/*.ts', 'dist/entities/**/*.js'],
+  migrations: ['src/migration/**/*.ts', 'dist/migration/*.js'],
+  cli: {
+    entitiesDir: 'src/entity',
+    migrationsDir: 'src/migration'
+  }
 }
 
 export { typeOrmConfig }

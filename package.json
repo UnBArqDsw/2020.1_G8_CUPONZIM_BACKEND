@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "build": "sucrase ./src -d ./dist --transforms typescript,imports",
+    "build": "tsc --project . ",
     "test": "jest --no-cache"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "pg": "^8.4.0",
     "reflect-metadata": "^0.1.13",
+    "tsc": "^1.20150623.0",
     "typeorm": "^0.2.28"
   },
   "devDependencies": {
