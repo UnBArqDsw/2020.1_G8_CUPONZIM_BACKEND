@@ -2,6 +2,6 @@
     "watch": ["src"],
     "ext": "ts",
     "execMap": {
-        "ts": "tsnd -P ./tsconfig.json src/index.ts"
+        "ts": "ts-node src/index.ts"
     }
 }

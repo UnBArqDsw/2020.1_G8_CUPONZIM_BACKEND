@@ -7,11 +7,10 @@
   "database": "cuponzim",
   "synchronize": true,
   "logging": false,
-  "entities": ["src/entities/**/*.ts", "dist/entities/**/*.js"],
+  "entities": ["src/entity/**/*.ts", "dist/entity/**/*.js"],
   "migrations": ["src/migration/**/*.ts", "dist/migration/*.js"],
   "cli": {
     "entitiesDir": "src/entity",
     "migrationsDir": "src/migration"
   }
-
 }
