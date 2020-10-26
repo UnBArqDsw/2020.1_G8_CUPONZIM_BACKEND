@@ -11,7 +11,8 @@ export class ClientController {
     return this.ClientRepository.findOne(request.params.id)
   }
 
-  async save (request: Request, response: Response, next: NextFunction): Promise<Client | undefined> {
+  async create (request: Request, response: Response, next: NextFunction): Promise<Client | undefined> {
+    console.log(request)
     return this.ClientRepository.save(request.body)
   }
 

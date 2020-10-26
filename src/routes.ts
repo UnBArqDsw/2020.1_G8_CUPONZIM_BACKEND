@@ -20,7 +20,7 @@ export const Routes = [{
   method: 'post',
   route: '/users',
   controller: ClientController,
-  action: 'save'
+  action: 'create'
 }, {
   method: 'delete',
   route: '/users/:id',
