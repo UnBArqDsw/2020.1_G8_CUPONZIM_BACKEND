@@ -1,0 +1,38 @@
+{
+  "ts-node": {
+    "transpileOnly": true,
+    "ignore": [
+      "/node_modules/",
+      "/*.test.ts" 
+    ],
+  },
+  "compilerOptions": {    
+    "outDir": "./dist",
+    "module": "CommonJS",
+    "target": "ES2017",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strictNullChecks": true,
+    "baseUrl": "./src",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "paths": {
+      "@domain/*": [
+        "domain/*"
+      ],
+      "@presentation/*": [
+        "presentation/*"
+      ],
+      "@data/*": [
+        "data/*"
+      ],
+      "@infra/*": [
+        "infra/*"
+      ],
+      "@main/*": [
+        "main/*"
+      ]
+    },
+  },
+  "exclude": ["node_modules"],
+}
