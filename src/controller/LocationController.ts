@@ -8,7 +8,7 @@ export class LocationController {
 
 
     verifyToken(request: Request) {
-        const jwt = request.header['Authorization']
+        const jwt = request.headers.authorization
         let auth = new AuthController();
         const canUseRoute = auth.checkJwt(jwt);
         if (canUseRoute) return true;
