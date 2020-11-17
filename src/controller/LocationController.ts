@@ -16,10 +16,7 @@ export class LocationController {
     }
 
     tokenMiddleware(response: Response, hasToken: Boolean, dbResponse) {
-        return hasToken ? dbResponse : response.json({
-            Error: "Authorization falied",
-            status: 401
-        })
+        return hasToken ? dbResponse : response.status(401).send("Authorization falied")
     }
 
     async all(request: Request, response: Response, next: NextFunction): Promise<Array<Location>> {
@@ -27,7 +24,7 @@ export class LocationController {
         //     Error: "Authorization falied",
         //     status: 401
         // })
-        return this.tokenMiddleware(response, this.verifyToken(Request), await this.LocationRepository.find())
+        return this.tokenMiddleware(response, this.verifyToken(request), await this.LocationRepository.find())
     }
 
     async one(request: Request, response: Response, next: NextFunction): Promise<Location | undefined> {
@@ -37,7 +34,7 @@ export class LocationController {
     async create(request: Request, response: Response, next: NextFunction): Promise<Location | undefined> {
         console.log(request)
         //return this.LocationRepository.save(request.body)
-        return this.tokenMiddleware(response, this.verifyToken(Request), await this.LocationRepository.save(request.body))
+        return this.tokenMiddleware(response, this.verifyToken(request), await this.LocationRepository.save(request.body))
     }
 
     async remove(request: Request, response: Response, next: NextFunction): Promise<void> {

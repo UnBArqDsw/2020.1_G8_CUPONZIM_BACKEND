@@ -36,7 +36,7 @@ export const Routes = [{
 },
 {
   method: 'get',
-  route: '/get/:id',
+  route: '/location/:id',
   controller: LocationController,
   action: 'one'
 }, {
