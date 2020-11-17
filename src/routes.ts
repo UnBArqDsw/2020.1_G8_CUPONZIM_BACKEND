@@ -1,4 +1,5 @@
 import { ClientController } from './controller/ClientController'
+import { CouponController } from './controller/CouponController'
 
 export const Routes = [{
   method: 'get',
@@ -26,4 +27,14 @@ export const Routes = [{
   route: '/users/:id',
   controller: ClientController,
   action: 'remove'
+}, {
+  method: 'get',
+  route: '/coupon',
+  controller: CouponController,
+  action: 'GetLot'
+},{
+  method: 'post',
+  route: '/coupon',
+  controller: CouponController,
+  action: 'CreateLot'
 }]
