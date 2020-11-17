@@ -1,5 +1,6 @@
 import { ClientController } from './controller/ClientController'
 import AuthController from './controller/Authcontroller'
+import { ShopController } from './controller/ShopController'
 
 export const Routes = [{
   method: 'get',
@@ -27,4 +28,19 @@ export const Routes = [{
   route: '/users/:id',
   controller: ClientController,
   action: 'remove'
+}, {
+  method: 'post',
+  route: '/shop',
+  controller: ShopController,
+  action: 'create'
+}, {
+  method: 'get',
+  route: '/shop/all',
+  controller: ShopController,
+  action: 'all'
+}, {
+  method: 'get',
+  route: '/shop/:id',
+  controller: ShopController,
+  action: 'one'
 }]

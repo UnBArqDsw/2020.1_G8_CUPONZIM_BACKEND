@@ -1,5 +1,5 @@
 
-import { getRepository, Any } from 'typeorm'
+import { getRepository } from 'typeorm'
 import { NextFunction, Request, Response } from 'express'
 import { Client } from '../entity/Client'
 import jwt from 'jsonwebtoken'
