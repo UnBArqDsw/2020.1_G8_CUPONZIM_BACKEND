@@ -66,7 +66,7 @@ export class CouponController {
   async DeleteLot (request: Request, response: Response, next: NextFunction): Promise<Coupon | void> {
     return this.tokenMiddleware (response,
       this.verifyToken (request),
-      await this.CouponRepository.find ({ where: { lot_id: request.body.lot_id }, take:1 }))
+      await this.CouponRepository.find ({ where: { lot_id: request.body.lot_id }, take: 1 }))
   }
 
   // POST /coupon/SetCouponAsUsed
