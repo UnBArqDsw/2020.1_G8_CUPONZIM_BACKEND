@@ -20,20 +20,20 @@ export class LocationController {
     }
 
     async all(request: Request, response: Response, next: NextFunction): Promise<Array<Location>> {
-        // return this.verifyToken(Request) ? response.json(this.LocationRepository.find()) : response.json({
-        //     Error: "Authorization falied",
-        //     status: 401
-        // })
         return this.tokenMiddleware(response, this.verifyToken(request), await this.LocationRepository.find())
     }
 
     async one(request: Request, response: Response, next: NextFunction): Promise<Location | undefined> {
-        return this.LocationRepository.findOne(request.params.id)
+        try {
+            return this.tokenMiddleware(response, this.verifyToken(request), this.LocationRepository.find({ where: { idLocation: request.params.id }, take: 1 }))
+        }
+        catch{
+            return response.status(404)
+        }
     }
 
     async create(request: Request, response: Response, next: NextFunction): Promise<Location | undefined> {
         console.log(request)
-        //return this.LocationRepository.save(request.body)
         return this.tokenMiddleware(response, this.verifyToken(request), await this.LocationRepository.save(request.body))
     }
 
