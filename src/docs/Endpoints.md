@@ -125,7 +125,8 @@
 * Response
 * * 200: Retorna todas as lojas cadastradas na localização ou somente uma se for enviado idShop nos parâmetros
 * * 401: JWT não informado ou não válido
-* * 500: Erro interno 
+* * 500: Erro interno
+
 #### PUT:
 * Header
 * * Authorization: Bearer JWT (shop)
