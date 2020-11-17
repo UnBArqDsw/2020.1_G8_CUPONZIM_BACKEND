@@ -1,5 +1,6 @@
 import { ClientController } from './controller/ClientController'
 import { CouponController } from './controller/CouponController'
+import AuthController from './controller/Authcontroller'
 
 export const Routes = [{
   method: 'get',
@@ -7,10 +8,10 @@ export const Routes = [{
   controller: ClientController,
   action: 'all'
 }, {
-  method: 'get',
-  route: '/jojozin',
-  controller: ClientController,
-  action: 'jojo'
+  method: 'post',
+  route: '/login',
+  controller: AuthController,
+  action: 'login'
 },
 {
   method: 'get',
@@ -32,9 +33,24 @@ export const Routes = [{
   route: '/coupon',
   controller: CouponController,
   action: 'GetLot'
-},{
+}, {
   method: 'post',
   route: '/coupon',
   controller: CouponController,
   action: 'CreateLot'
+}, {
+  method: 'put',
+  route: '/coupon',
+  controller: CouponController,
+  action: 'UpdateLot'
+}, {
+  method: 'delete',
+  route: '/coupon',
+  controller: CouponController,
+  action: 'DeleteLot'
+}, {
+  method: 'post',
+  route: '/coupon/SetCouponAsUsed',
+  controller: CouponController,
+  action: 'SetCouponAsUsed'
 }]

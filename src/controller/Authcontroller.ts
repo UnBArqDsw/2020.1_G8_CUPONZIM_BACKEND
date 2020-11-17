@@ -11,28 +11,25 @@ export default class AuthController {
     async login (request: Request, response: Response, next: NextFunction): Promise<void> {
       // Check if username and password are set
       const { username, password } = request.body
+      console.log(username)
       if (!(username && password)) {
         response.status(400).send()
       }
 
       let user: Client
       try {
-        user = await this.ClientRepository.findOneOrFail({ where: { username } })
+        user = await this.ClientRepository.findOneOrFail({ where: { username_client: username, password_client: password } })
+        const token = jwt.sign(
+          { userId: user.idClient, username: user.idClient },
+          config,
+          { expiresIn: '1h' }
+        )
+
+        // Send the jwt in the response
+        response.send(token)
       } catch (error) {
-        response.status(401).send()
+        response.status(401).send(error)
       }
-
-      // Check if encrypted password match
-
-      // Sing JWT, valid for 1 hour
-      const token = jwt.sign(
-        { userId: user.idClient, username: user.idClient },
-        config,
-        { expiresIn: '1h' }
-      )
-
-      // Send the jwt in the response
-      response.send(token)
     }
 
     checkJwt (tokenToVerify:string) :boolean {
