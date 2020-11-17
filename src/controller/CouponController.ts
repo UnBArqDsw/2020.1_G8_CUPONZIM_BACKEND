@@ -71,6 +71,6 @@ export class CouponController {
 
   // POST /coupon/SetCouponAsUsed
   async SetCouponAsUsed (request: Request, response: Response, next: NextFunction): Promise<Coupon | void> {
-    return this.tokenMiddleware (response, this.verifyToken(request),await this.updateLot(request, response))
+    return this.tokenMiddleware (response, this.verifyToken(request), await this.updateLot(request, response))
   }
 }
