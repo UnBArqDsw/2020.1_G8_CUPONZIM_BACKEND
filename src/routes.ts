@@ -1,5 +1,6 @@
 import { ClientController } from './controller/ClientController'
 import { LocationController} from './controller/LocationController'
+import AuthController from './controller/Authcontroller'
 
 export const Routes = [{
   method: 'get',
@@ -7,10 +8,10 @@ export const Routes = [{
   controller: ClientController,
   action: 'all'
 }, {
-  method: 'get',
-  route: '/jojozin',
-  controller: ClientController,
-  action: 'jojo'
+  method: 'post',
+  route: '/login',
+  controller: AuthController,
+  action: 'login'
 },
 {
   method: 'get',
@@ -40,12 +41,12 @@ export const Routes = [{
   action: 'one'
 }, {
   method: 'post',
-  route: '/users',
+  route: '/location',
   controller: LocationController,
   action: 'create'
 }, {
   method: 'delete',
-  route: '/users/:id',
+  route: '/location/:id',
   controller: LocationController,
   action: 'remove'
 }

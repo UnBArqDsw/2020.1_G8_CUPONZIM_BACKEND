@@ -1,4 +1,6 @@
-import { getRepository, Any } from 'typeorm'; import { NextFunction, Request, Response } from 'express'; import { Client } from '../entity/Client'
+import { getRepository, Any } from 'typeorm';
+import { NextFunction, Request, Response } from 'express';
+import { Client } from '../entity/Client'
 
 export class ClientController {
   private ClientRepository = getRepository(Client);

@@ -1,4 +1,6 @@
-import { getRepository, Any } from 'typeorm'; import { NextFunction, Request, Response } from 'express'; import { Location } from '../entity/Location'
+import { getRepository, Any } from 'typeorm';
+import { NextFunction, Request, Response } from 'express';
+import { Location } from '../entity/Location'
 import AuthController from './Authcontroller'
 export class LocationController {
     private LocationRepository = getRepository(Location);
@@ -13,8 +15,8 @@ export class LocationController {
         else return false;
     }
 
-    tokenMiddleware(response:Response, hasToken:Boolean, dbResponse){
-        return hasToken ? response.json(dbResponse): response.json({
+    tokenMiddleware(response: Response, hasToken: Boolean, dbResponse) {
+        return hasToken ? dbResponse : response.json({
             Error: "Authorization falied",
             status: 401
         })
@@ -25,7 +27,7 @@ export class LocationController {
         //     Error: "Authorization falied",
         //     status: 401
         // })
-        return this.tokenMiddleware(response,this.verifyToken(Request), this.LocationRepository.find())
+        return this.tokenMiddleware(response, this.verifyToken(Request), await this.LocationRepository.find())
     }
 
     async one(request: Request, response: Response, next: NextFunction): Promise<Location | undefined> {
@@ -34,7 +36,8 @@ export class LocationController {
 
     async create(request: Request, response: Response, next: NextFunction): Promise<Location | undefined> {
         console.log(request)
-        return this.LocationRepository.save(request.body)
+        //return this.LocationRepository.save(request.body)
+        return this.tokenMiddleware(response, this.verifyToken(Request), await this.LocationRepository.save(request.body))
     }
 
     async remove(request: Request, response: Response, next: NextFunction): Promise<void> {
