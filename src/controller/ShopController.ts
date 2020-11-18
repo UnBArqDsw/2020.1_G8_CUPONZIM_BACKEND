@@ -23,7 +23,7 @@ export class ShopController {
     }
 
     async all (request: Request, response: Response, next: NextFunction): Promise<Array<Shop>> {
-      return this.tokenMiddleware(response, await this.verifyToken(request), await this.ShopRepository.find())
+      return this.tokenMiddleware(response, true, await this.ShopRepository.find())
     }
 
     async one (request: Request, response: Response, next: NextFunction): Promise<Shop | undefined> {
