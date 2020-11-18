@@ -1,6 +1,8 @@
-import { getRepository, Any } from 'typeorm';
-import { NextFunction, Request, Response } from 'express';
+import { getRepository } from 'typeorm'
+import { NextFunction, Request, Response } from 'express'
 import { Client } from '../entity/Client'
+import config from '../config/config'
+import md5 from 'md5'
 
 export class ClientController {
   private ClientRepository = getRepository(Client);
@@ -14,8 +16,8 @@ export class ClientController {
   }
 
   async create (request: Request, response: Response, next: NextFunction): Promise<Client | undefined> {
-    console.log(request)
-    return this.ClientRepository.save(request.body)
+    const object = { ...request.body, password_client: md5(request.body.password_client + config) }
+    return this.ClientRepository.save(object)
   }
 
   async remove (request: Request, response: Response, next: NextFunction): Promise<void> {
