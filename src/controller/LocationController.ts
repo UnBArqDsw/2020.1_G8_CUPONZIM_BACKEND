@@ -5,9 +5,7 @@ import AuthController from './Authcontroller'
 export class LocationController {
     private LocationRepository = getRepository(Location);
 
-
-
-    verifyToken(request: Request) {
+    private verifyToken(request: Request) {
         const jwt = request.headers.authorization
         let auth = new AuthController();
         const canUseRoute = auth.checkJwt(jwt);
@@ -15,7 +13,7 @@ export class LocationController {
         else return false;
     }
 
-    tokenMiddleware(response: Response, hasToken: Boolean, dbResponse) {
+    private tokenMiddleware(response: Response, hasToken: Boolean, dbResponse) {
         return hasToken ? dbResponse : response.status(401).send("Authorization falied")
     }
 
