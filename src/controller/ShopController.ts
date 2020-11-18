@@ -8,7 +8,6 @@ export class ShopController {
 
     private async verifyToken (request: Request): Promise<boolean> {
       const jwt = request.headers.authorization
-
       const auth = new AuthController()
       const canUseRoute = await auth.checkJwt(<string>jwt)
       if (canUseRoute) return true

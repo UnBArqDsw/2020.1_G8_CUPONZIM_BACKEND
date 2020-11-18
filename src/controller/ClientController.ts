@@ -16,8 +16,7 @@ export class ClientController {
   }
 
   async create (request: Request, response: Response, next: NextFunction): Promise<Client | undefined> {
-    console.log(request)
-    const object = { ...request.body, password: md5(...request.body.password + config) }
+    const object = { ...request.body, password_client: md5(request.body.password_client + config) }
     return this.ClientRepository.save(object)
   }
 

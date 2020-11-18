@@ -13,9 +13,8 @@ export default class AuthController {
     // Check if username and password are set
     const { username, password } = request.body
     const pass = md5(password + config)
-    console.log(pass)
     if (!(username && password)) {
-      response.status(400).send()
+      response.status(400).send({ Erro: 'É necessário fornecer a senha e o username para o login!' })
     }
 
     let user: Client
@@ -29,7 +28,7 @@ export default class AuthController {
 
       response.send(token)
     } catch (error) {
-      response.status(401).send(error)
+      response.status(401).send({ Erro: 'Não foi possível encontrar usuário com as credenciais fornecidas ' })
     }
   }
 
