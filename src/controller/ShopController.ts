@@ -6,7 +6,7 @@ import AuthController from './Authcontroller'
 export class ShopController {
     private ShopRepository = getRepository(Shop);
 
-    async verifyToken (request: Request): Promise<boolean> {
+    private async verifyToken (request: Request): Promise<boolean> {
       const jwt = request.headers.authorization
 
       const auth = new AuthController()
@@ -15,7 +15,7 @@ export class ShopController {
       else return false
     }
 
-    tokenMiddleware (response: Response, hasToken: boolean, dbResponse: any): any {
+    private tokenMiddleware (response: Response, hasToken: boolean, dbResponse: any): any {
       return hasToken ? dbResponse : response.json({
         Error: 'Authorization falied',
         status: 401
