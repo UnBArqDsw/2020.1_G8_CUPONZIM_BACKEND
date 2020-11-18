@@ -1,5 +1,6 @@
 import { ClientController } from './controller/ClientController'
-import { LocationController} from './controller/LocationController'
+import { LocationController } from './controller/LocationController'
+import { CouponController } from './controller/CouponController'
 import AuthController from './controller/Authcontroller'
 
 export const Routes = [{
@@ -28,7 +29,7 @@ export const Routes = [{
   route: '/users/:id',
   controller: ClientController,
   action: 'remove' ///
-},{
+}, {
   method: 'get',
   route: '/location',
   controller: LocationController,
@@ -49,5 +50,29 @@ export const Routes = [{
   route: '/location/:id',
   controller: LocationController,
   action: 'remove'
-}
-]
+}, {
+  method: 'get',
+  route: '/coupon',
+  controller: CouponController,
+  action: 'GetLot'
+}, {
+  method: 'post',
+  route: '/coupon',
+  controller: CouponController,
+  action: 'CreateLot'
+}, {
+  method: 'put',
+  route: '/coupon',
+  controller: CouponController,
+  action: 'UpdateLot'
+}, {
+  method: 'delete',
+  route: '/coupon',
+  controller: CouponController,
+  action: 'DeleteLot'
+}, {
+  method: 'post',
+  route: '/coupon/SetCouponAsUsed',
+  controller: CouponController,
+  action: 'SetCouponAsUsed'
+}]
