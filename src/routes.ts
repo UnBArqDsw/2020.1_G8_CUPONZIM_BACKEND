@@ -2,6 +2,7 @@ import { ClientController } from './controller/ClientController'
 import { LocationController } from './controller/LocationController'
 import { CouponController } from './controller/CouponController'
 import AuthController from './controller/Authcontroller'
+import { ShopController } from './controller/ShopController'
 
 export const Routes = [{
   method: 'get',
@@ -50,6 +51,21 @@ export const Routes = [{
   route: '/location/:id',
   controller: LocationController,
   action: 'remove'
+}, {
+  method: 'post',
+  route: '/shop',
+  controller: ShopController,
+  action: 'create'
+}, {
+  method: 'get',
+  route: '/shop/all',
+  controller: ShopController,
+  action: 'all'
+}, {
+  method: 'get',
+  route: '/shop/:id',
+  controller: ShopController,
+  action: 'one'
 }, {
   method: 'get',
   route: '/coupon',
