@@ -5,7 +5,7 @@ export class Client {
    @PrimaryGeneratedColumn()
    idClient: number;
 
-   @Column('varchar', { length: 50 })
+   @Column('varchar', { unique: true, length: 50 })
    username_client: string;
 
    @Column('varchar', { length: 50 })

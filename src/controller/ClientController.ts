@@ -15,9 +15,16 @@ export class ClientController {
     return this.ClientRepository.findOne(request.params.id)
   }
 
-  async create (request: Request, response: Response, next: NextFunction): Promise<Client | undefined> {
-    const object = { ...request.body, password_client: md5(request.body.password_client + config) }
-    return this.ClientRepository.save(object)
+  async create (request: Request, response: Response, next: NextFunction): Promise<any> {
+    try {
+      const object = { ...request.body, password_client: md5(request.body.password_client + config) }
+      return await this.ClientRepository.save(object)
+    } catch (error) {
+      return response.json({
+        Error: 'Unique Constraint',
+        status: 403
+      })
+    }
   }
 
   async remove (request: Request, response: Response, next: NextFunction): Promise<void> {
