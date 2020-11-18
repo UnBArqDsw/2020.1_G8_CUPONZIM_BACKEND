@@ -4,6 +4,7 @@ import { NextFunction, Request, Response } from 'express'
 import { Client } from '../entity/Client'
 import jwt from 'jsonwebtoken'
 import config from '../config/config'
+import md5 from 'md5'
 
 export default class AuthController {
   private ClientRepository = getRepository(Client);
@@ -11,14 +12,15 @@ export default class AuthController {
   async login (request: Request, response: Response, next: NextFunction): Promise<void> {
     // Check if username and password are set
     const { username, password } = request.body
-    console.log(username)
+    const pass = md5(password + config)
+    console.log(pass)
     if (!(username && password)) {
       response.status(400).send()
     }
 
     let user: Client
     try {
-      user = await this.ClientRepository.findOneOrFail({ where: { username_client: username, password_client: password } })
+      user = await this.ClientRepository.findOneOrFail({ where: { username_client: username, password_client: pass } })
       const token = jwt.sign(
         { userId: user.idClient, username: user.idClient },
         <string>config,
