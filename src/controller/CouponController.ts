@@ -1,10 +1,12 @@
 import { getRepository } from 'typeorm'
 import { NextFunction, Request, Response } from 'express'
 import { Coupon } from '../entity/Coupon'
+import { Lot } from '../entity/Lot'
 import AuthController from './Authcontroller'
 
 export class CouponController {
   private CouponRepository = getRepository(Coupon)
+  private LotRepository = getRepository(Lot)
 
   private verifyToken(request: Request) {
     const jwt = request.headers.authorization
@@ -49,7 +51,22 @@ export class CouponController {
 
   //  POST /lot
   async CreateLot (request: Request, response: Response, next: NextFunction): Promise<Coupon | void | JSON> {
-    return this.tokenMiddleware (response, this.verifyToken(request), await this.CouponRepository.save(request.body))
+    const params = {
+      description_lot_coupon: request.body.description_lot_coupon,
+      original_price: request.body.original_price,
+      discount_price: request.body.discount_price,
+      expiration_date: request.body.expiration_date
+    }
+    const lot = await this.LotRepository.save(params)
+    const coupon_array = []
+    for (let i = 1; i <= request.body.coupon_numbers; i++) {
+      const coupon_params = { 
+        is_used: false,
+        lot: lot
+      }
+      coupon_array.push(coupon_params)
+    }
+    return this.tokenMiddleware (response, this.verifyToken(request), await this.CouponRepository.save(coupon_array))
   }
 
   // GET /lot
