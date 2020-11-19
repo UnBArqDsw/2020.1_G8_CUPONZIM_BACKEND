@@ -1,15 +1,21 @@
 import AuthController from '../controller/Authcontroller'
-import {  Request } from 'express'
+import { Request } from 'express'
 
- export default class TokenVerifier {
-  verifyToken(request: Request) {
-    const jwt = request.headers.authorization
-    if (jwt) {
-      let auth = new AuthController();
-      const canUseRoute = auth.checkJwt(jwt);
-      if (canUseRoute) return true;
+export default class TokenVerifier {
+  verifyToken (request: Request) {
+    try {
+      const jwt = request.headers.authorization
+      if (jwt) {
+        const auth = new AuthController()
+        const jwtvalid = auth.checkJwt(jwt)
+
+        return jwtvalid
+      } else {
+        return false
+      }
+    } catch (e) {
+      return false
     }
-    return false
   }
 
   tokenMiddleware (response: Response, hasToken: boolean, dbResponse) {
