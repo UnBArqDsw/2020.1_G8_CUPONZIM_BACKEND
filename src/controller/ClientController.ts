@@ -1,6 +1,8 @@
-import { getRepository, Any } from 'typeorm';
-import { NextFunction, Request, Response } from 'express';
+import { getRepository } from 'typeorm'
+import { NextFunction, Request, Response } from 'express'
 import { Client } from '../entity/Client'
+import config from '../config/config'
+import md5 from 'md5'
 
 export class ClientController {
   private ClientRepository = getRepository(Client);
@@ -13,9 +15,16 @@ export class ClientController {
     return this.ClientRepository.findOne(request.params.id)
   }
 
-  async create (request: Request, response: Response, next: NextFunction): Promise<Client | undefined> {
-    console.log(request)
-    return this.ClientRepository.save(request.body)
+  async create (request: Request, response: Response, next: NextFunction): Promise<any> {
+    try {
+      const object = { ...request.body, password_client: md5(request.body.password_client + config) }
+      return await this.ClientRepository.save(object)
+    } catch (error) {
+      return response.json({
+        Error: 'Unique Constraint',
+        status: 403
+      })
+    }
   }
 
   async remove (request: Request, response: Response, next: NextFunction): Promise<void> {

@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js install
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add md5
 
 PATH: 
-  /home/andre/anaconda3/bin:/home/andre/.composer/vendor/bin:/home/andre/anaconda3/bin:/home/andre/.composer/vendor/bin:/home/andre/.local/bin:/home/andre/.composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/andre/Android/Sdk/emulator:/home/andre/Android/Sdk/tools:/home/andre/Android/Sdk/tools/bin:/home/andre/Android/Sdk/platform-tools:/home/andre/Android/Sdk/emulator:/home/andre/Android/Sdk/tools:/home/andre/Android/Sdk/tools/bin:/home/andre/Android/Sdk/platform-tools:/home/andre/Android/Sdk/emulator:/home/andre/Android/Sdk/tools:/home/andre/Android/Sdk/tools/bin:/home/andre/Android/Sdk/platform-tools:/opt/mssql-tools/bin:/home/andre/Android/Sdk/emulator:/home/andre/Android/Sdk/tools:/home/andre/Android/Sdk/tools/bin:/home/andre/Android/Sdk/platform-tools:/opt/mssql-tools/bin
+  /home/andre/.composer/vendor/bin:/home/andre/anaconda3/bin:/home/andre/anaconda3/condabin:/home/andre/.composer/vendor/bin:/home/andre/.local/bin:/home/andre/.composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/andre/Android/Sdk/emulator:/home/andre/Android/Sdk/tools:/home/andre/Android/Sdk/tools/bin:/home/andre/Android/Sdk/platform-tools:/home/andre/Android/Sdk/emulator:/home/andre/Android/Sdk/tools:/home/andre/Android/Sdk/tools/bin:/home/andre/Android/Sdk/platform-tools:/home/andre/Android/Sdk/emulator:/home/andre/Android/Sdk/tools:/home/andre/Android/Sdk/tools/bin:/home/andre/Android/Sdk/platform-tools:/opt/mssql-tools/bin:/home/andre/Android/Sdk/emulator:/home/andre/Android/Sdk/tools:/home/andre/Android/Sdk/tools/bin:/home/andre/Android/Sdk/platform-tools:/opt/mssql-tools/bin
 
 Yarn version: 
   1.21.1
