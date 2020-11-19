@@ -19,9 +19,9 @@ export class Shop {
    @Column('varchar', { length: 50 })
    type_location: string;
 
-   @ManyToOne(() => Location, location => location.shops)
+   @ManyToOne(type => Location, location => location.shops)
    location: Location;
 
-   @OneToMany(() => Lot, lot => lot.shop)
+   @OneToMany(type => Lot, lot => lot.shop)
    lots: Lot[];
 }

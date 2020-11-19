@@ -1,6 +1,7 @@
 import { ClientController } from './controller/ClientController'
 import { LocationController } from './controller/LocationController'
 import { CouponController } from './controller/CouponController'
+import {  FavoriteController} from './controller/FavoritesController'
 import AuthController from './controller/Authcontroller'
 import { ShopController } from './controller/ShopController'
 
@@ -91,4 +92,10 @@ export const Routes = [{
   route: '/coupon/SetCouponAsUsed',
   controller: CouponController,
   action: 'SetCouponAsUsed'
+},
+{
+  method: 'post',
+  route: '/favorite',
+  controller: FavoriteController,
+  action: 'likeDeslike'
 }]

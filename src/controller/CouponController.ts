@@ -1,22 +1,13 @@
 import { getRepository } from 'typeorm'
 import { NextFunction, Request, Response } from 'express'
 import { Coupon } from '../entity/Coupon'
-import AuthController from './Authcontroller'
+import { Lot } from '../entity/Lot'
+import  TokenVerifier from '../Middleware/TokenVerifier'
 
 export class CouponController {
   private CouponRepository = getRepository(Coupon)
-
-  private verifyToken (request: Request) {
-    const jwt = request.header['Authorization']
-    const auth = new AuthController()
-    const canUseRoute = auth.checkJwt (jwt)
-    if (canUseRoute) return true
-    else return false
-  }
-
-  private tokenMiddleware (response: Response, hasToken: boolean, dbResponse) {
-    return hasToken ? dbResponse : response.status(401).send('Authorization failed')
-  }
+  private LotRepository = getRepository(Lot)
+  private TokenVerifier = new TokenVerifier()
   
   private async findLot (request: Request, response: Response) {
     try {
@@ -47,30 +38,45 @@ export class CouponController {
 
   //  POST /lot
   async CreateLot (request: Request, response: Response, next: NextFunction): Promise<Coupon | void | JSON> {
-    return this.tokenMiddleware (response, this.verifyToken(request), await this.CouponRepository.save(request.body))
+    const params = {
+      description_lot_coupon: request.body.description_lot_coupon,
+      original_price: request.body.original_price,
+      discount_price: request.body.discount_price,
+      expiration_date: request.body.expiration_date
+    }
+    const lot = await this.LotRepository.save(params)
+    const coupon_array = []
+    for (let i = 1; i <= request.body.coupon_numbers; i++) {
+      const coupon_params = { 
+        is_used: false,
+        lot: lot
+      }
+      coupon_array.push(coupon_params)
+    }
+    return this.TokenVerifier.tokenMiddleware(response, this.TokenVerifier.verifyToken(request), await this.CouponRepository.save(coupon_array))
   }
 
   // GET /lot
   async GetLot (request: Request, response: Response, next: NextFunction): Promise<Coupon | void> {
-   return this.tokenMiddleware (response, this.verifyToken(request), await this.findLot(request, response))     
+   return this.TokenVerifier.tokenMiddleware(response, this.TokenVerifier.verifyToken(request), await this.findLot(request, response))  
   }
 
   // PUT /lot
   async UpdateLot (request: Request, response: Response, next: NextFunction): Promise<Coupon | void> {
-    return this.tokenMiddleware (response, 
-      this.verifyToken (request), 
-      await this.CouponRepository.find({ where: { lot_id: request.body.lot_id }, take: 1 }))
+    return this.TokenVerifier.tokenMiddleware (response,
+      this.TokenVerifier.verifyToken (request),
+      await this.updateLot(request,response))
   }
 
   // DELETE /lot
   async DeleteLot (request: Request, response: Response, next: NextFunction): Promise<Coupon | void> {
-    return this.tokenMiddleware (response,
-      this.verifyToken (request),
+    return this.TokenVerifier.tokenMiddleware(response,
+      this.TokenVerifier.verifyToken (request),
       await this.CouponRepository.find ({ where: { lot_id: request.body.lot_id }, take: 1 }))
   }
 
   // POST /coupon/SetCouponAsUsed
   async SetCouponAsUsed (request: Request, response: Response, next: NextFunction): Promise<Coupon | void> {
-    return this.tokenMiddleware (response, this.verifyToken(request), await this.updateLot(request, response))
+    return this.TokenVerifier.tokenMiddleware (response, this.TokenVerifier.verifyToken(request), await this.updateLot(request, response))
   }
 }
