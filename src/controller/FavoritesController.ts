@@ -2,26 +2,12 @@ import { getRepository, Any } from 'typeorm';
 import { NextFunction, Request, Response } from 'express';
 import { Client } from '../entity/Client'
 import { Shop } from '../entity/Shop'
-import AuthController from './Authcontroller'
+import  TokenVerifier from '../Middleware/TokenVerifier'
 
 export class FavoriteController {
   private ClientRepository = getRepository(Client);
   private ShopRepository = getRepository(Shop)
-
-  private verifyToken(request: Request) {
-    const jwt = request.headers.authorization
-    if (jwt) {
-      let auth = new AuthController();
-      const canUseRoute = auth.checkJwt(jwt);
-      if (canUseRoute) return true;
-    }
-    return false
-
-  }
-
-  private tokenMiddleware(response: Response, hasToken: Boolean, dbResponse) {
-    return hasToken ? dbResponse : response.status(401).send("Authorization falied")
-  }
+  private TokenVerifier = new TokenVerifier()
 
   async likeDeslike(request: Request, response: Response, next: NextFunction): Promise<Array<Client>> {
     const user = await this.ClientRepository.find({ where: { idClient: request.body.idClient } });
@@ -43,6 +29,8 @@ export class FavoriteController {
         newUser[0].favorite_shop_client = [store[0]];
       }
     }
-    return this.tokenMiddleware(response, this.verifyToken(request), await this.ClientRepository.save({ ...user[0], ...newUser[0] }))
+    return this.TokenVerifier.tokenMiddleware(response,
+      this.TokenVerifier.verifyToken(request),
+      await this.ClientRepository.save({ ...user[0], ...newUser[0] }))
   }
 }
