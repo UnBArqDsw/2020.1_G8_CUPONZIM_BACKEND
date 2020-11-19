@@ -26,7 +26,7 @@ export default class AuthController {
         { expiresIn: '1h' }
       )
 
-      response.send(token)
+      response.status(200).send({ Success: true, Token: token })
     } catch (error) {
       response.status(401).send({ Erro: 'Não foi possível encontrar usuário com as credenciais fornecidas ' })
     }
