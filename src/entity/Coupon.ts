@@ -9,6 +9,6 @@ export class Coupon {
    @Column()
    is_used: boolean;
 
-   @ManyToOne(() => Lot, lot => lot.coupons)
+   @ManyToOne(type => Lot, lot => lot.coupons)
    lot: Lot;
 }
