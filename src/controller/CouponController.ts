@@ -6,12 +6,14 @@ import AuthController from './Authcontroller'
 export class CouponController {
   private CouponRepository = getRepository(Coupon)
 
-  private verifyToken (request: Request) {
-    const jwt = request.header['Authorization']
-    const auth = new AuthController()
-    const canUseRoute = auth.checkJwt (jwt)
-    if (canUseRoute) return true
-    else return false
+  private verifyToken(request: Request) {
+    const jwt = request.headers.authorization
+    if (jwt) {
+      let auth = new AuthController();
+      const canUseRoute = auth.checkJwt(jwt);
+      if (canUseRoute) return true;
+    }
+    return false
   }
 
   private tokenMiddleware (response: Response, hasToken: boolean, dbResponse) {
@@ -59,7 +61,7 @@ export class CouponController {
   async UpdateLot (request: Request, response: Response, next: NextFunction): Promise<Coupon | void> {
     return this.tokenMiddleware (response, 
       this.verifyToken (request), 
-      await this.CouponRepository.find({ where: { lot_id: request.body.lot_id }, take: 1 }))
+      await this.updateLot(request,response))
   }
 
   // DELETE /lot
