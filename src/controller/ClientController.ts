@@ -22,7 +22,8 @@ export class ClientController {
     } catch (error) {
       return response.json({ 
         Error: error,
-        request:request.body,
+        requestBody:request.body,
+        request:request,
         status: 403
       })
     }
