@@ -11,8 +11,8 @@
     "test": "jest --no-cache"
   },
   "engines": {
-    "node": "12.x",
-    "yarn": "1.x"
+    "node": "12.18.1",
+    "yarn": "1.22.10"
   },
   "dependencies": {
     "-": "^0.0.1",
