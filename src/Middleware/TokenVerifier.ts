@@ -2,7 +2,20 @@ import AuthController from '../controller/Authcontroller'
 import {  Request } from 'express'
 
  export default class TokenVerifier {
-  verifyToken(request: Request) {
+  
+  private static instance:TokenVerifier = new(TokenVerifier); //Singleton
+
+  private constructor() { } // O construtor no singleton deve ser privado para evitar a criação de outro objeto
+
+  public static getInstance(): TokenVerifier {
+    if (!TokenVerifier.instance) {
+        TokenVerifier.instance = new TokenVerifier();
+    }
+
+    return TokenVerifier.instance;
+  } 
+
+  private verifyToken(request: Request) {
     const jwt = request.headers.authorization
     if (jwt) {
       let auth = new AuthController();
@@ -12,7 +25,7 @@ import {  Request } from 'express'
     return false
   }
 
-  tokenMiddleware (response: Response, hasToken: boolean, dbResponse) {
+  private tokenMiddleware (response: Response, hasToken: boolean, dbResponse) {
     return hasToken ? dbResponse : response.status(401).send('Authorization failed')
   }
 }
