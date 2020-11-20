@@ -10,6 +10,10 @@
     "build": "ts-node src/index.ts",
     "test": "jest --no-cache"
   },
+  "engines": {
+    "node": "12.x",
+    "yarn": "1.x"
+  },
   "dependencies": {
     "-": "^0.0.1",
     "@types/jsonwebtoken": "^8.5.0",
