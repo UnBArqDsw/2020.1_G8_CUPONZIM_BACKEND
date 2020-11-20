@@ -20,8 +20,8 @@ export class ClientController {
       const object = { ...request.body, password_client: md5(request.body.password_client + config) }
       return await this.ClientRepository.save(object)
     } catch (error) {
-      return response.json({
-        Error: 'Unique Constraint',
+      return response.json({ 
+        Error: error,
         status: 403
       })
     }
