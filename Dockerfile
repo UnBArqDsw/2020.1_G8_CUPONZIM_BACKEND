@@ -6,8 +6,8 @@ COPY . /cuponzim
 COPY package.json /cuponzim
 COPY yarn.lock /cuponzim
 
-RUN yarn 
+RUN npm install 
 
 EXPOSE 3333
 
-CMD ["yarn" "dev"]
+CMD ["npm" "run" "dev"]

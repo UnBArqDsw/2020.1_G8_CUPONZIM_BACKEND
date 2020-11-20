@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm'
 import { NextFunction, Request, Response } from 'express'
 import { Shop } from '../entity/Shop'
-import  TokenVerifier from '../Middleware/TokenVerifier'
+import TokenVerifier from '../Middleware/TokenVerifier'
 
 export class ShopController {
   private ShopRepository = getRepository(Shop);

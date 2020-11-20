@@ -17,7 +17,7 @@ export class Client {
    @Column()
    cellphone_number_client: number;
 
-   @ManyToMany(type => Shop,{ eager: true })
+   @ManyToMany(type => Shop, { eager: true })
    @JoinTable()
    favorite_shop_client: Shop[]
 }

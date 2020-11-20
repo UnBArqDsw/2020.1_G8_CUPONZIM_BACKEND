@@ -1,5 +1,5 @@
 import AuthController from '../controller/Authcontroller'
-import {  Request } from 'express'
+import { Request } from 'express'
 
  export default class TokenVerifier {
   
@@ -15,17 +15,23 @@ import {  Request } from 'express'
     return TokenVerifier.instance;
   } 
 
-  private verifyToken(request: Request) {
-    const jwt = request.headers.authorization
-    if (jwt) {
-      let auth = new AuthController();
-      const canUseRoute = auth.checkJwt(jwt);
-      if (canUseRoute) return true;
+  verifyToken (request: Request) {
+    try {
+      const jwt = request.headers.authorization
+      if (jwt) {
+        const auth = new AuthController()
+        const jwtvalid = auth.checkJwt(jwt)
+
+        return jwtvalid
+      } else {
+        return false
+      }
+    } catch (e) {
+      return false
     }
-    return false
   }
 
-  private tokenMiddleware (response: Response, hasToken: boolean, dbResponse) {
+  tokenMiddleware (response: Response, hasToken: boolean, dbResponse) {
     return hasToken ? dbResponse : response.status(401).send('Authorization failed')
   }
 }

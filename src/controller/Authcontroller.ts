@@ -6,12 +6,11 @@ import { ShopOwner } from '../entity/ShopOwner'
 import jwt from 'jsonwebtoken'
 import config from '../config/config'
 import md5 from 'md5'
-import { Shop } from 'entity/Shop'
 
 export default class AuthController {
   private ClientRepository = getRepository(Client);
   private OwnerRepository = getRepository(ShopOwner);
-  async login(request: Request, response: Response, next: NextFunction): Promise<void> {
+  async login (request: Request, response: Response, next: NextFunction): Promise<void> {
     // Check if username and password are set
     const { username, password } = request.body
     const pass = md5(password + config)
@@ -22,44 +21,44 @@ export default class AuthController {
     let user: Client
     let shopOwner: ShopOwner
     try {
-      if (request.body.isShopOwner){
+      if (request.body.isShopOwner) {
         shopOwner = await this.OwnerRepository.findOneOrFail({ where: { username_shop: username, password_shop: pass } })
-        const token = jwt.sign(
+        const token = await jwt.sign(
           { shopOwnerId: shopOwner.idShopOwner, username: shopOwner.username_shop },
           <string>config,
           { expiresIn: '10h' }
         )
-      }
-      else {
+        response.status(200).send({ Success: true, Token: token })
+      } else {
         user = await this.ClientRepository.findOneOrFail({ where: { username_client: username, password_client: pass } })
 
-        const token = jwt.sign(
+        const token = await jwt.sign(
           { userId: user.idClient, username: user.idClient },
           <string>config,
-          { expiresIn: '1h' }
+          { expiresIn: '10h' }
         )
+
+        response.status(200).send({ Success: true, Token: token })
       }
-      response.status(200).send({ Success: true, Token: token })
     } catch (error) {
-      response.status(401).send({ Erro: 'Não foi possível encontrar usuário com as credenciais fornecidas ' })
+      console.log(error)
+      response.status(401).send({ Erro: 'Não foi possível encontrar usuário com as credenciais fornecidas ', error })
     }
   }
 
-  async checkJwt(tokenToVerify: string): Promise<boolean> {
-    // Get the jwt token from the head
-    const token = <string>tokenToVerify
-
-    const stringparsed = token.split('Bearer')
-    let tokenfinal = stringparsed[1]
-
-    tokenfinal = tokenfinal.split(' ').join('')
-
+  async checkJwt (tokenToVerify: string): Promise<any> {
     try {
+      const token = <string>tokenToVerify
+
+      const stringparsed = token.split('Bearer')
+      let tokenfinal = stringparsed[1]
+
+      tokenfinal = tokenfinal.split(' ').join('')
+
       await jwt.verify(tokenfinal, <string>config)
+      return (jwt.decode(tokenfinal))
     } catch (error) {
       return false
     }
-
-    return true
   };
 }
