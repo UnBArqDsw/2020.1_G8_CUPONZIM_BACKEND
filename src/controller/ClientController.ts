@@ -23,7 +23,6 @@ export class ClientController {
       return response.json({ 
         Error: error,
         requestBody:request.body,
-        request:request,
         status: 403
       })
     }
