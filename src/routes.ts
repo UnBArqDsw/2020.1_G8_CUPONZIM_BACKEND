@@ -114,14 +114,14 @@ export const Routes = [{
   action: 'likeDeslike'
 },
 {
-  method:'post',
-  route:'/shopowner',
+  method: 'post',
+  route: '/shopowner',
   controller: ShopOwnerController,
   action: 'create'
 },
 {
-  method:'get',
-  route:'/shopowner/all',
+  method: 'get',
+  route: '/shopowner/all',
   controller: ShopOwnerController,
   action: 'all'
 }

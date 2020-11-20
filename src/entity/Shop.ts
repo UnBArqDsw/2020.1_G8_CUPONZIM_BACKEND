@@ -1,10 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm'
 import { Location } from './Location'
 import { Lot } from './Lot'
-import { ShopOwner } from './ShopOwner';
+import { ShopOwner } from './ShopOwner'
 
 @Entity()
 export class Shop {
+   [x: string]: ShopOwner[];
    @PrimaryGeneratedColumn()
    idShop: number;
 
@@ -26,6 +27,6 @@ export class Shop {
    @ManyToOne(type => ShopOwner, owner => owner.shops)
    owner: ShopOwner;
 
-   @OneToMany(type => Lot, lot => lot.shop,{eager:true})
+   @OneToMany(type => Lot, lot => lot.shop, { eager: true })
    lots: Lot[];
 }

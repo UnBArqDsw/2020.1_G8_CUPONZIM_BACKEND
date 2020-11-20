@@ -16,7 +16,6 @@ export class ShopOwnerController {
   }
 
   async create (request: Request, response: Response, next: NextFunction): Promise<any> {
-    console.log("adadvewa");
     try {
       const object = { ...request.body, password_shop: md5(request.body.password_shop + config) }
       return await this.ShopOwnerRepository.save(object)
