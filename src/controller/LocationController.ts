@@ -1,4 +1,4 @@
-import { getRepository, Any } from 'typeorm'
+import { getRepository } from 'typeorm'
 import { NextFunction, Request, Response } from 'express'
 import { Location } from '../entity/Location'
 import TokenVerifier from '../Middleware/TokenVerifier'

@@ -23,8 +23,7 @@ export class ShopController {
     try {
       const location = await this.LocationRepository.find({ where: { idLocation: request.body.idLocation } })
       const owner = await this.ShopOwnerRepository.find({ where: { idShopOwner: request.body.idShopOwner } })
-      console.log(location, owner)
-      console.log(owner, owner[0])
+
 
       const shp = new Shop()
 
@@ -39,7 +38,7 @@ export class ShopController {
       location[0].shops.push(shopdone)
       await this.ShopOwnerRepository.save(owner[0])
       await this.LocationRepository.save(location[0])
-      return shopdone
+      return TokenVerifier.getInstance().tokenMiddleware(response, TokenVerifier.getInstance().verifyToken(request), shopdone)
     } catch (er) {
       return response.send(404).json(er)
     }
