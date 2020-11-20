@@ -19,7 +19,7 @@ export class Lot {
    @Column()
    expiration_date: string;
 
-   @OneToMany(() => Coupon, coupon => coupon.lot)
+   @OneToMany(() => Coupon, coupon => coupon.lot, {eager:true})
    coupons: Coupon[];
 
    @ManyToOne(() => Shop, shop => shop.lots)

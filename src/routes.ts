@@ -1,9 +1,10 @@
 import { ClientController } from './controller/ClientController'
 import { LocationController } from './controller/LocationController'
 import { CouponController } from './controller/CouponController'
-import {  FavoriteController} from './controller/FavoritesController'
+import { FavoriteController } from './controller/FavoritesController'
 import AuthController from './controller/Authcontroller'
 import { ShopController } from './controller/ShopController'
+import { ShopOwnerController } from './controller/ShopOwnerController'
 
 export const Routes = [{
   method: 'get',
@@ -30,7 +31,7 @@ export const Routes = [{
   method: 'delete',
   route: '/users/:id',
   controller: ClientController,
-  action: 'remove' ///
+  action: 'remove'
 }, {
   method: 'get',
   route: '/location',
@@ -67,7 +68,20 @@ export const Routes = [{
   route: '/shop/:id',
   controller: ShopController,
   action: 'one'
-}, {
+},
+{
+  method: 'delete',
+  route: '/shop/:id',
+  controller: ShopController,
+  action: 'remove'
+},
+{
+  method: 'get',
+  route: '/coupon/all',
+  controller: CouponController,
+  action: 'GetAllLot'
+},
+{
   method: 'get',
   route: '/coupon',
   controller: CouponController,
@@ -98,4 +112,17 @@ export const Routes = [{
   route: '/favorite',
   controller: FavoriteController,
   action: 'likeDeslike'
-}]
+},
+{
+  method:'post',
+  route:'/shopowner',
+  controller: ShopOwnerController,
+  action: 'create'
+},
+{
+  method:'get',
+  route:'/shopowner/all',
+  controller: ShopOwnerController,
+  action: 'all'
+}
+]

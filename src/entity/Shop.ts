@@ -26,6 +26,6 @@ export class Shop {
    @ManyToOne(type => ShopOwner, owner => owner.shops)
    owner: ShopOwner;
 
-   @OneToMany(type => Lot, lot => lot.shop)
+   @OneToMany(type => Lot, lot => lot.shop,{eager:true})
    lots: Lot[];
 }

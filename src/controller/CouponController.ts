@@ -3,19 +3,30 @@ import { NextFunction, Request, Response } from 'express'
 import { Coupon } from '../entity/Coupon'
 import { Lot } from '../entity/Lot'
 import TokenVerifier from '../Middleware/TokenVerifier'
+import { Shop } from '../entity/Shop'
 
 export class CouponController {
   private CouponRepository = getRepository(Coupon)
   private LotRepository = getRepository(Lot)
+  private ShopRepository = getRepository(Shop)
 
   private async findLot (request: Request, response: Response) {
     try {
-      const dbResponse = await this.CouponRepository.find({
+      let shop: Shop = await this.ShopRepository.find({where:{idShop:request.body.idShop}})[0]
+      const dbResponse = await this.LotRepository.find({
         where: [
-          { location_id: request.body.location_id },
-          { shop_id: request.body.shop_id }
+          { shop: shop },
         ]
       })
+      return dbResponse
+    } catch {
+      return response.status(404)
+    }
+  }
+
+  private async findAllLot (request: Request, response: Response) {
+    try {
+      const dbResponse = await this.LotRepository.find()
       return dbResponse
     } catch {
       return response.status(404)
@@ -37,11 +48,13 @@ export class CouponController {
 
   //  POST /lot
   async CreateLot (request: Request, response: Response, next: NextFunction): Promise<Coupon | void | JSON> {
+    let shop: Shop = await this.ShopRepository.find({where:{idShop:request.body.idShop}})[0]
     const params = {
       description_lot_coupon: request.body.description_lot_coupon,
       original_price: request.body.original_price,
       discount_price: request.body.discount_price,
-      expiration_date: request.body.expiration_date
+      expiration_date: request.body.expiration_date,
+      shop: shop
     }
     const lot = await this.LotRepository.save(params)
     const coupon_array = []
@@ -57,7 +70,13 @@ export class CouponController {
 
   // GET /lot
   async GetLot (request: Request, response: Response, next: NextFunction): Promise<Coupon | void> {
+    console.log("adadvewa");
     return TokenVerifier.getInstance().tokenMiddleware(response, TokenVerifier.getInstance().verifyToken(request), await this.findLot(request, response))
+  }
+
+  async GetAllLot (request: Request, response: Response, next: NextFunction): Promise<Coupon | void> {
+    console.log("adadvewa");
+    return TokenVerifier.getInstance().tokenMiddleware(response, TokenVerifier.getInstance().verifyToken(request), await this.findAllLot(request, response))
   }
 
   // PUT /lot

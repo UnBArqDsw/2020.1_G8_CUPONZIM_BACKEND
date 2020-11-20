@@ -5,10 +5,9 @@ import TokenVerifier from '../Middleware/TokenVerifier'
 
 export class ShopController {
   private ShopRepository = getRepository(Shop);
-  private TokenVerifier = new TokenVerifier()
 
   async all (request: Request, response: Response, next: NextFunction): Promise<Array<Shop>> {
-    return this.TokenVerifier.tokenMiddleware(response, true, await this.ShopRepository.find())
+    return TokenVerifier.getInstance().tokenMiddleware(response, true, await this.ShopRepository.find())
   }
 
   async one (request: Request, response: Response, next: NextFunction): Promise<Shop | undefined> {
