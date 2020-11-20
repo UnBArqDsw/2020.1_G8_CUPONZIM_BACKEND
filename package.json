@@ -6,7 +6,7 @@
   "author": "zarbielli <jlfz06@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "sucrase-node src/index.ts",
+    "dev": "npx ts-node src/index.ts",
     "build": "ts-node src/index.ts",
     "test": "jest --no-cache"
   },
