@@ -56,6 +56,6 @@ createConnection().then(async connection => {
       message: 'Hello World!'
     })
   })
-  app.listen(3333)
+  app.listen(process.env.PORT || 3333)
   console.log('Express server has started on port 3333. Open http://localhost:3000/users to see results')
 }).catch(error => console.log(error))
