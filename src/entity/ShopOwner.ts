@@ -11,7 +11,7 @@ export class ShopOwner {
    @Column('varchar', { length: 50 })
    password_shop: string;
 
-   @OneToMany(type => Shop,shop => shop.owner,{ eager: true })
+   @OneToMany(type => Shop, shop => shop.owner, { eager: true })
    @JoinTable()
    shops: Shop[]
 }

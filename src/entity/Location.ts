@@ -17,6 +17,6 @@ export class Location {
    @Column('varchar', { length: 50 })
    type_location: string;
 
-   @OneToMany(type => Shop, shop => shop.location,{ eager: true })
+   @OneToMany(type => Shop, shop => shop.location, { eager: true })
    shops: Shop[];
 }

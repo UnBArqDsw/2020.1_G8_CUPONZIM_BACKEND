@@ -1,20 +1,19 @@
 import AuthController from '../controller/Authcontroller'
 import { Request } from 'express'
 
- export default class TokenVerifier {
-  
-  private static instance:TokenVerifier = new(TokenVerifier); //Singleton
+export default class TokenVerifier {
+  private static instance:TokenVerifier = new (TokenVerifier)(); // Singleton
 
-  private constructor() { } // O construtor no singleton deve ser privado para 
-                            // evitar a criação de outro objeto
+  private constructor () { } // O construtor no singleton deve ser privado para
+  // evitar a criação de outro objeto
 
-  public static getInstance(): TokenVerifier {
+  public static getInstance (): TokenVerifier {
     if (!TokenVerifier.instance) {
-        TokenVerifier.instance = new TokenVerifier();
+      TokenVerifier.instance = new TokenVerifier()
     }
 
-    return TokenVerifier.instance;
-  } 
+    return TokenVerifier.instance
+  }
 
   verifyToken (request: Request) {
     try {
