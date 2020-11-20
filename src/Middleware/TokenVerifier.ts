@@ -5,7 +5,8 @@ import { Request } from 'express'
   
   private static instance:TokenVerifier = new(TokenVerifier); //Singleton
 
-  private constructor() { } // O construtor no singleton deve ser privado para evitar a criação de outro objeto
+  private constructor() { } // O construtor no singleton deve ser privado para 
+                            // evitar a criação de outro objeto
 
   public static getInstance(): TokenVerifier {
     if (!TokenVerifier.instance) {

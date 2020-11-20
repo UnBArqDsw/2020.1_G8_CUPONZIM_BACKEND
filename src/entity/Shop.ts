@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm'
 import { Location } from './Location'
 import { Lot } from './Lot'
+import { ShopOwner } from './ShopOwner';
 
 @Entity()
 export class Shop {
@@ -21,6 +22,9 @@ export class Shop {
 
    @ManyToOne(type => Location, location => location.shops)
    location: Location;
+
+   @ManyToOne(type => ShopOwner, owner => owner.shops)
+   owner: ShopOwner;
 
    @OneToMany(type => Lot, lot => lot.shop)
    lots: Lot[];
