@@ -4,7 +4,7 @@ WORKDIR /cuponzim
 
 COPY . /cuponzim
 COPY package.json /cuponzim
-COPY yarn.lock /cuponzim
+COPY package-lock.json /cuponzim
 
 RUN npm install 
 

@@ -2,7 +2,7 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 
 const typeOrmConfig: PostgresConnectionOptions = {
   type: 'postgres',
-  host: 'db',
+  host: String(process.env.DATABASE_URL),
   port: 5432,
   username: String(process.env.DB_USERNAME),
   password: String(process.env.DB_PASSWORD),
