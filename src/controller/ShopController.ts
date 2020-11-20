@@ -34,9 +34,12 @@ export class ShopController {
       shp.type_location = request.body.type_location
 
       const shopdone = await this.ShopRepository.save(shp)
-      console.log(shopdone, shopdone[0])
+
       owner[0].shops.push(shopdone)
-      return await this.ShopOwnerRepository.save(owner[0])
+      location[0].shops.push(shopdone)
+      await this.ShopOwnerRepository.save(owner[0])
+      await this.LocationRepository.save(location[0])
+      return shopdone
     } catch (er) {
       return response.send(404).json(er)
     }
